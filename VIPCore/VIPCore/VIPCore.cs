@@ -8,6 +8,7 @@ using CounterStrikeSharp.API.Modules.Commands;
 using CounterStrikeSharp.API.Modules.Cvars;
 using CounterStrikeSharp.API.Modules.Entities;
 using CounterStrikeSharp.API.Modules.Timers;
+using MenuManager;
 using Microsoft.Extensions.Logging;
 using MySqlConnector;
 using VipCoreApi;
@@ -40,8 +41,16 @@ public class VipCore : BasePlugin
 
     public string DbConnectionString = string.Empty;
 
+    public static IMenuApi? MenuApi;
+    private readonly PluginCapability<IMenuApi?> _menuCapability = new("menu:nfcore");   
 
     private string[] _sortedItems = [];
+
+    public override void OnAllPluginsLoaded(bool hotReload)
+    {
+        MenuApi = _menuCapability.Get();
+        if (MenuApi == null) Console.WriteLine("MenuManager Core not found...");
+    }
 
     public override void Load(bool hotReload)
     {

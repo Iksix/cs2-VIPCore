@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VipCoreApi\VipCoreApi.csproj" />
+    <Reference Include="..\MenuManagerApi.dll" />
   </ItemGroup>
 
 </Project>

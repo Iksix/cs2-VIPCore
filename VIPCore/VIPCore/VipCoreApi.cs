@@ -285,11 +285,15 @@ public class VipCoreApi : IVipCoreApi
 
     public void PrintToChat(CCSPlayerController player, string message)
     {
+        if (message == "") return;
+        
         _vipCore.PrintToChat(player, message);
     }
 
     public void PrintToChatAll(string message)
     {
+        if (message == "") return;
+        
         _vipCore.PrintToChatAll(message);
     }
 
@@ -387,6 +391,11 @@ public class VipCoreApi : IVipCoreApi
 
     public IMenu CreateMenu(string title)
     {
+        if (VipCore.MenuApi != null)
+        {
+            return VipCore.MenuApi.GetMenu(title);
+        }
+        
         return _vipCore.CoreConfig.UseCenterHtmlMenu ? new CenterHtmlMenu(title, _vipCore) : new ChatMenu(title);
     }
 
